@@ -1,4 +1,4 @@
-package service;
+package Application.service;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,9 +48,6 @@ public class WitaiService {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        System.out.println(response);
-
 
     }
 
