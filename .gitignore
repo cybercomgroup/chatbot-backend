@@ -131,3 +131,4 @@ $RECYCLE.BIN/
 src/main/resources/
 src/test/
 target/
+.idea/emacs.xml
