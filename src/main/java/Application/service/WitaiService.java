@@ -23,7 +23,7 @@ public class WitaiService {
     private static final String charset = "UTF-8";
     private static String versionParam = "0.0.1";
 
-    private String query;
+    private String query, phrase;
 
     private URLConnection connection;
 
@@ -31,23 +31,7 @@ public class WitaiService {
 
     private JSONObject jsonObject;
 
-    public WitaiService(String phrase) {
-        try {
-            query = String.format("v=%s&q=%s",
-                    URLEncoder.encode(versionParam, charset),
-                    URLEncoder.encode(phrase, charset));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        if(witResponse(query) != null)
-            response = witResponse(query);
-
-        try {
-            jsonObject = new JSONObject(new JSONTokener(response));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public WitaiService() {
 
     }
 
@@ -103,6 +87,27 @@ public class WitaiService {
 
     public JSONObject getJsonResponse() {
         return jsonObject;
+    }
+
+    public void setPhrase(String phrase){
+        this.phrase = phrase;
+
+        try {
+            query = String.format("v=%s&q=%s",
+                    URLEncoder.encode(versionParam, charset),
+                    URLEncoder.encode(phrase, charset));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        if(witResponse(query) != null)
+            response = witResponse(query);
+
+        try {
+            jsonObject = new JSONObject(new JSONTokener(response));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /*public static void main(String[] args){
