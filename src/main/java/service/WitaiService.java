@@ -29,6 +29,8 @@ public class WitaiService {
 
     private String response;
 
+    private JSONObject jsonObject;
+
     public WitaiService(String phrase) {
         try {
             query = String.format("v=%s&q=%s",
@@ -41,6 +43,12 @@ public class WitaiService {
         if(witResponse(query) != null)
             response = witResponse(query);
 
+        try {
+            jsonObject = new JSONObject(new JSONTokener(response));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         System.out.println(response);
 
 
@@ -52,7 +60,6 @@ public class WitaiService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         connection.setRequestProperty("Authorization", "Bearer " + token);
         connection.setRequestProperty("Accept-Charset", charset);
 
@@ -95,6 +102,10 @@ public class WitaiService {
 
     public String getResponse() {
         return response;
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
     }
 
     /*public static void main(String[] args){
