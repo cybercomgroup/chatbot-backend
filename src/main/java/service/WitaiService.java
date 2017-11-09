@@ -100,11 +100,11 @@ public class WitaiService {
         return stringBuilder.toString();
     }
 
-    public String getResponse() {
+    public String getStringResponse() {
         return response;
     }
 
-    public JSONObject getJsonObject() {
+    public JSONObject getJsonResponse() {
         return jsonObject;
     }
 
