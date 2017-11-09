@@ -5,14 +5,14 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.Arrays;
 
 
 /**
+ *
+ * @version 2017-11-09
  * @author Johan Martinson
  * @author Daniel Rydén
  */
