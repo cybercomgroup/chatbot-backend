@@ -1,4 +1,4 @@
-package controller;
+package Application.controller;
 
 public class ChatController {
 
