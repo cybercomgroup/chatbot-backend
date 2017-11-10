@@ -1,5 +1,6 @@
 package Application.service;
 
+import Application.pojo.ResponseParser_pojo;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -105,17 +106,22 @@ public class WitaiService {
 
         try {
             jsonObject = new JSONObject(new JSONTokener(response));
+            System.out.println(jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
-    /*public static void main(String[] args){
+    //TODO: remove when testing is done
+    public static void main(String[] args){
         String s = "";
         for(String str: args) {
             s = s+" " +str;
         }
         System.out.println(s);
-        WitaiService witaiService = new WitaiService(s);
-    }*/
+        WitaiService witaiService = new WitaiService();
+        witaiService.setPhrase(s);
+        ResponseParser_pojo rH = new ResponseParser_pojo();
+        rH.setResponse(witaiService.getJsonResponse());
+
+    }
 }
