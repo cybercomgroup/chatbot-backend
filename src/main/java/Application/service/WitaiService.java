@@ -8,6 +8,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -16,7 +17,7 @@ import java.net.URLEncoder;
  * @author Johan Martinson
  * @author Daniel Rydén
  */
-
+@Service
 public class WitaiService {
     private static final String url = "https://api.wit.ai/message";
     private static final String token = "EWFRMP2FXYKOEF4CSSSANDO4F4NTGZCN";
