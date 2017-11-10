@@ -20,13 +20,13 @@ public class ResponseParser_pojo {
     }
 
     public String getKeyWord() {
-
         return keyWord;
     }
 
     public void setResponse(JSONObject response) {
         this.response = response;
-
+        intent = null;
+        keyWord = null;
         try {
             parseQuery(response);
         } catch (JSONException e) {
@@ -41,8 +41,10 @@ public class ResponseParser_pojo {
             switch (it.next()) {
                 case "intent":
                     intent = query.getJSONObject("entities").getJSONArray("intent").getJSONObject(0).getString("value");
+                    break;
                 case "mat":
                     keyWord = query.getJSONObject("entities").getJSONArray("mat").getJSONObject(0).getString("value");
+                    break;
 
             }
         }
