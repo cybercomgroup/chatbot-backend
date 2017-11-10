@@ -2,12 +2,9 @@ package Application.controller;
 
 import Application.pojo.ResponseParser_pojo;
 import org.json.JSONObject;
-import org.omg.CORBA.portable.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import Application.service.*;
 
@@ -29,11 +26,6 @@ public class ChatController {
     JSONObject*/ String Request(@RequestParam(value = "request") String request) {
         this.request = request;
         was.setPhrase(this.request);
-        /* Psudo kod
-           Här ska det typ vara
-         */
-
-
 
         JSONObject jobj = was.getJsonResponse();
         responseParserPojo.setResponse(jobj);

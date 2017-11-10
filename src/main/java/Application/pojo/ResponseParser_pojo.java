@@ -47,6 +47,6 @@ public class ResponseParser_pojo {
             }
         }
         //TODO: Remove when testing is done
-        System.out.println("intent:"+ intent + "\nkeyword: " + keyWord);
+        //System.out.println("intent:"+ intent + "\nkeyword: " + keyWord);
     }
 }
