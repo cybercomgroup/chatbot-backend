@@ -4,7 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ResponseParser_pojo {
     private JSONObject response;
     private String intent = null, keyWord = null;
@@ -45,6 +47,6 @@ public class ResponseParser_pojo {
             }
         }
         //TODO: Remove when testing is done
-        System.out.println("intent:"+ intent + "\nkeyword: " + keyWord);
+        //System.out.println("intent:"+ intent + "\nkeyword: " + keyWord);
     }
 }

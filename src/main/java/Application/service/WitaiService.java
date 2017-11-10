@@ -9,6 +9,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -17,7 +18,7 @@ import java.net.URLEncoder;
  * @author Johan Martinson
  * @author Daniel Rydén
  */
-
+@Service
 public class WitaiService {
     private static final String url = "https://api.wit.ai/message";
     private static final String token = "EWFRMP2FXYKOEF4CSSSANDO4F4NTGZCN";
@@ -112,7 +113,7 @@ public class WitaiService {
         }
     }
     //TODO: remove when testing is done
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         String s = "";
         for(String str: args) {
             s = s+" " +str;
@@ -123,5 +124,5 @@ public class WitaiService {
         ResponseParser_pojo rH = new ResponseParser_pojo();
         rH.setResponse(witaiService.getJsonResponse());
 
-    }
+    }*/
 }
