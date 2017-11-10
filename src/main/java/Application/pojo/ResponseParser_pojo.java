@@ -4,7 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ResponseParser_pojo {
     private JSONObject response;
     private String intent = null, keyWord = null;
