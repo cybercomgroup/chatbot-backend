@@ -113,7 +113,7 @@ public class WitaiService {
         }
     }
     //TODO: remove when testing is done
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         String s = "";
         for(String str: args) {
             s = s+" " +str;
@@ -124,5 +124,5 @@ public class WitaiService {
         ResponseParser_pojo rH = new ResponseParser_pojo();
         rH.setResponse(witaiService.getJsonResponse());
 
-    }
+    }*/
 }

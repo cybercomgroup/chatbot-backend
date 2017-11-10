@@ -1,7 +1,8 @@
 package Application.controller;
 
-import org.json.JSONArray;
+import Application.pojo.ResponseParser_pojo;
 import org.json.JSONObject;
+import org.omg.CORBA.portable.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ public class ChatController {
 
     @Autowired
     private WitaiService was;
+    private ResponseParser_pojo responseParserPojo = new ResponseParser_pojo();
 
 
     private String request;
@@ -29,6 +31,8 @@ public class ChatController {
          */
 
         JSONObject jobj = was.getJsonResponse();
+        responseParserPojo.setResponse(jobj);
+
         return jobj;
     }
 }
