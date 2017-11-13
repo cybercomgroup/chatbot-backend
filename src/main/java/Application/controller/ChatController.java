@@ -18,6 +18,9 @@ public class ChatController {
     @Autowired
     private ResponseParser_pojo responseParserPojo /*= new ResponseParser_pojo()*/;
 
+    @Autowired
+    private ResponseHandler_pojo responseHandlerPojo;
+
 
     private String request;
 
@@ -30,6 +33,7 @@ public class ChatController {
         JSONObject jobj = was.getJsonResponse();
         responseParserPojo.setResponse(jobj);
 
-        return responseParserPojo.getIntent() + " " + responseParserPojo.getKeyWord();
+
+        return responseHandlerPojo.getResponse();
     }
 }

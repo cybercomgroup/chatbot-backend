@@ -11,6 +11,9 @@ public class ResponseParser_pojo {
     private JSONObject response;
     private String intent = null, keyWord = null;
 
+    @Autowired
+    private ResponseHandler_pojo responseHandlerPojo;
+
     public ResponseParser_pojo() {
 
     }
@@ -48,7 +51,7 @@ public class ResponseParser_pojo {
 
             }
         }
-        //TODO: Remove when testing is done
-        //System.out.println("intent:"+ intent + "\nkeyword: " + keyWord);
+        ResponseHandler_pojo.setIntentAndKeyWord(intent, keyWord);
+
     }
 }
