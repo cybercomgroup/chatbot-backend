@@ -19,6 +19,7 @@ public class ResponseHandler_pojo {
                     case "pizza": return "Nemos!";
                     case "kaffe": return "Kokboken, Pressbyrån, Cafe blå";
                     case "thai": return "Thaistugan!";
+
                 }
 
             case "tid": {
@@ -28,7 +29,7 @@ public class ResponseHandler_pojo {
                 }
 
             }
-            case null: return "Jag förstod inte din fråga";
+            case "": return "Jag förstod inte din fråga";
 
         }
     }

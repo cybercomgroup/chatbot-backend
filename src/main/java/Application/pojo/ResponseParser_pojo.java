@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResponseParser_pojo {
     private JSONObject response;
-    private String intent = null, keyWord = null;
+    private String intent = "", keyWord = "";
 
     @Autowired
     private ResponseHandler_pojo responseHandlerPojo;
@@ -28,8 +28,8 @@ public class ResponseParser_pojo {
 
     public void setResponse(JSONObject response) {
         this.response = response;
-        intent = null;
-        keyWord = null;
+        intent = "";
+        keyWord = "";
         try {
             parseQuery(response);
         } catch (JSONException e) {
