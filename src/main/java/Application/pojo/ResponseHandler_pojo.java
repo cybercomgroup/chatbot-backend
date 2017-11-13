@@ -17,7 +17,7 @@ public class ResponseHandler_pojo {
             case "locate":
                 switch (keyWord) {
                     case "pizza": return "Nemos!";
-                    case "kaffe": return "Kokboken, Pressbyrån";
+                    case "kaffe": return "Kokboken, Pressbyrån, Cafe blå";
                     case "thai": return "Thaistugan!";
                 }
 
