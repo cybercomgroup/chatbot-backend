@@ -4,12 +4,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseParser_pojo {
     private JSONObject response;
-    private String intent = null, keyWord = null;
+    private String intent = "", keyWord = "";
+
+    @Autowired
+    private ResponseHandler_pojo responseHandlerPojo;
 
     public ResponseParser_pojo() {
 
@@ -20,13 +24,13 @@ public class ResponseParser_pojo {
     }
 
     public String getKeyWord() {
-
         return keyWord;
     }
 
     public void setResponse(JSONObject response) {
         this.response = response;
-
+        intent = "";
+        keyWord = "";
         try {
             parseQuery(response);
         } catch (JSONException e) {
@@ -41,12 +45,14 @@ public class ResponseParser_pojo {
             switch (it.next()) {
                 case "intent":
                     intent = query.getJSONObject("entities").getJSONArray("intent").getJSONObject(0).getString("value");
+                    break;
                 case "mat":
                     keyWord = query.getJSONObject("entities").getJSONArray("mat").getJSONObject(0).getString("value");
+                    break;
 
             }
         }
-        //TODO: Remove when testing is done
-        //System.out.println("intent:"+ intent + "\nkeyword: " + keyWord);
+        responseHandlerPojo.setIntentAndKeyWord(intent, keyWord);
+
     }
 }
