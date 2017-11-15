@@ -4,17 +4,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ResponseParser_pojo {
+public class ResponseParserPojo {
     private JSONObject response;
     private String intent = "", keyWord = "";
 
     @Autowired
-    private ResponseHandler_pojo responseHandlerPojo;
+    private ResponseHandlerPojo responseHandlerPojo;
 
-    public ResponseParser_pojo() {
+    public ResponseParserPojo() {
 
     }
 
@@ -51,7 +53,7 @@ public class ResponseParser_pojo {
 
             }
         }
-        ResponseHandler_pojo.setIntentAndKeyWord(intent, keyWord);
+        responseHandlerPojo.setIntentAndKeyWord(intent, keyWord);
 
     }
 }
