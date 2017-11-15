@@ -1,6 +1,5 @@
 package Application.controller;
 
-import Application.pojo.ResponseHandler_pojo;
 import Application.pojo.ResponseParser_pojo;
 import Application.service.WitaiService;
 import org.json.JSONObject;
@@ -19,7 +18,6 @@ public class ChatController {
 
     @Autowired
     private ResponseParser_pojo responseParserPojo /*= new ResponseParser_pojo()*/;
-
 
     private String request;
 
