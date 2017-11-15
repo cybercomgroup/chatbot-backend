@@ -1,6 +1,5 @@
 package Application.service;
 
-import Application.pojo.ResponseParser_pojo;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;

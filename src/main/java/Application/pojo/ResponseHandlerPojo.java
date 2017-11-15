@@ -3,10 +3,10 @@ package Application.pojo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ResponseHandler_pojo {
+public class ResponseHandlerPojo {
     private String intent, keyWord;
 
-    public ResponseHandler_pojo () {
+    public ResponseHandlerPojo() {
     }
 
     public void setIntentAndKeyWord(String intent, String keyWord) {
@@ -37,5 +37,5 @@ public class ResponseHandler_pojo {
         return "Jag förstod inte din fråga";
     }
 
-
+// IntentResolveService
 }
