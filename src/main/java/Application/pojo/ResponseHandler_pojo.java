@@ -1,5 +1,7 @@
 package Application.pojo;
 
+import org.springframework.stereotype.Component;
+
 @Component
 public class ResponseHandler_pojo {
     private String intent, keyWord;
@@ -12,7 +14,7 @@ public class ResponseHandler_pojo {
         this.keyWord = keyWord;
     }
 
-    public String getRespone() {
+    public String getResponse() {
         switch(intent) {
             case "locate":
                 switch (keyWord) {
@@ -32,6 +34,7 @@ public class ResponseHandler_pojo {
             case "": return "Jag förstod inte din fråga";
 
         }
+        return "Jag förstod inte din fråga";
     }
 
 
