@@ -1,3 +1,5 @@
+package Application.service;
+
 public interface ResponseHandlerInterface {
 
     public void setIntentAndKeyWord(String intent, String keyWord);

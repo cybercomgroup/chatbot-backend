@@ -1,4 +1,4 @@
-package Application.pojo;
+package Application.service;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -6,17 +6,17 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class ResponseParserPojo {
+@Service
+public class ResponseParserService {
     private JSONObject response;
     private String intent = "", keyWord = "";
 
     @Autowired
-    private ResponseHandlerPojo responseHandlerPojo;
+    private ResponseHandlerService responseHandlerService;
 
-    public ResponseParserPojo() {
+    public ResponseParserService() {
 
     }
 
@@ -50,10 +50,18 @@ public class ResponseParserPojo {
                 case "mat":
                     keyWord = query.getJSONObject("entities").getJSONArray("mat").getJSONObject(0).getString("value");
                     break;
+                case "v_sttrafik":
+                    keyWord = query.getJSONObject("entities").getJSONArray("v_sttrafik").getJSONObject(0).getString("value");
+                    break;
+                case "plats":
+                    keyWord = query.getJSONObject("entities").getJSONArray("plats").getJSONObject(0).getString("value");
+                    break;
+
+
 
             }
         }
-        responseHandlerPojo.setIntentAndKeyWord(intent, keyWord);
+        responseHandlerService.setIntentAndKeyWord(intent, keyWord);
 
     }
 }

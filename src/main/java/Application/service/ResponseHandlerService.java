@@ -1,12 +1,12 @@
-package Application.pojo;
+package Application.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class ResponseHandlerPojo {
+@Service
+public class ResponseHandlerService {
     private String intent, keyWord;
 
-    public ResponseHandlerPojo() {
+    public ResponseHandlerService() {
     }
 
     public void setIntentAndKeyWord(String intent, String keyWord) {
@@ -21,6 +21,10 @@ public class ResponseHandlerPojo {
                     case "pizza": return "Nemos!";
                     case "kaffe": return "Kokboken, Pressbyrån, Cafe blå";
                     case "thai": return "Thaistugan!";
+                    case "alkohol": return "FT, 11an, Gasquen";
+                    case "FT": return "Svea källarvåing";
+                    case "11an": return "På hörnet av Svea";
+                    case "Gasquen": return "Under kyrkan på campus Johanneberg";
 
                 }
 
@@ -28,9 +32,13 @@ public class ResponseHandlerPojo {
                 switch (keyWord) {
                     case "Gasquen": return "22:00!";
                     case "11an": return "15:00!";
+                    case "16": return "cablamo";
                 }
 
+
+
             }
+
             case "": return "Jag förstod inte din fråga";
 
         }

@@ -1,7 +1,7 @@
 package Application.controller;
 
-import Application.pojo.ResponseHandlerPojo;
-import Application.pojo.ResponseParserPojo;
+import Application.service.ResponseHandlerService;
+import Application.service.ResponseParserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +17,10 @@ public class ChatController {
     private WitaiService was;
 
     @Autowired
-    private ResponseParserPojo responseParserPojo /*= new ResponseParser_pojo()*/;
+    private ResponseParserService responseParserService /*= new ResponseParser_pojo()*/;
 
     @Autowired
-    private ResponseHandlerPojo responseHandlerPojo;
+    private ResponseHandlerService responseHandlerService;
 
 
     private String request;
@@ -32,9 +32,9 @@ public class ChatController {
         was.setPhrase(this.request);
 
         JSONObject jobj = was.getJsonResponse();
-        responseParserPojo.setResponse(jobj);
+        responseParserService.setResponse(jobj);
 
 
-        return responseHandlerPojo.getResponse();
+        return "\""+responseHandlerService.getResponse()+"\"";
     }
 }
