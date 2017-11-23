@@ -1,6 +1,6 @@
 package Application.service;
 
-import net.minidev.json.JSONObject;
+import org.json.JSONObject;
 
 public interface ResponseParserInterface {
 

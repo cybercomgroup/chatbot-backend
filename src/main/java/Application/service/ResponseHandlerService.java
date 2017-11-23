@@ -1,10 +1,14 @@
 package Application.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ResponseHandlerService {
     private String intent, keyWord;
+
+    @Autowired
+    private publicTransportService pts;
 
     public ResponseHandlerService() {
     }
@@ -32,7 +36,7 @@ public class ResponseHandlerService {
                 switch (keyWord) {
                     case "Gasquen": return "22:00!";
                     case "11an": return "15:00!";
-                    case "16": return "cablamo";
+                    case "16": return pts.getDepature();
                 }
 
 
