@@ -14,6 +14,9 @@ public class ResponseHandlerService {
     @Autowired
     private ResponsePojo responsePojo;
 
+    @Autowired
+    private PlaceService placeService;
+
     public ResponseHandlerService() {
     }
 
@@ -32,15 +35,15 @@ public class ResponseHandlerService {
             case "locate":
                 switch (keyWord) {
                     case "pizza":
-                        responsePojo.setResponse1("Nemos!");
+                        placeService.placeResponse("pizza");
                         break;
                     case "kaffe":
                         responsePojo.setResponse1("Kokboken");
                         responsePojo.setResponse2("Pressbyrån");
-                        responsePojo.setResponse3("Café blå");
+                        responsePojo.setResponse3("Café Norra Älvstranden");
                         break;
                     case "thai":
-                        responsePojo.setResponse1("Thaistugan!");
+                        placeService.placeResponse("thai");
                         break;
                     case "alkohol":
                         responsePojo.setResponse1("FT");
