@@ -39,7 +39,7 @@ public class PublicTransportService {
 
     public void getDepature() {
         date = new Date();
-        System.out.println(date);
+
         String url16 = "https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=9021014004490000&date=" + dateFormat.format(date);
         String url55 = "https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=9021014006675000&date=" + dateFormat.format(date);
 
@@ -79,6 +79,8 @@ public class PublicTransportService {
                 }
                 responsePojo.setResponse1(departureOne);
                 responsePojo.setResponse2(departureTwo);
+                departureOne = null;
+                departureTwo = null;
 
             } else if (bus.equals("55")) {
                 URL obj = new URL(url55);
@@ -96,6 +98,8 @@ public class PublicTransportService {
 
                 in.close();
                 JSONObject jsonObject = XML.toJSONObject(response.toString());
+
+                System.out.println(jsonObject);
                 jsonObject = jsonObject.getJSONObject("DepartureBoard");
                 JSONArray jsonArray = jsonObject.getJSONArray("Departure");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -110,6 +114,8 @@ public class PublicTransportService {
 
                 responsePojo.setResponse1(departureOne);
                 responsePojo.setResponse2(departureTwo);
+                departureOne = null;
+                departureTwo = null;
             }
 
 
