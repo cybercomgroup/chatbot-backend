@@ -56,6 +56,11 @@ public class ResponseHandlerService {
                     case "Gasquen":
                         responsePojo.setResponse1("Under kyrkan på campus Johanneberg");
                         break;
+                    case "Micro":
+                        responsePojo.setResponse1("Loungen, tredje våningen, Jupiter");
+                        responsePojo.setResponse2("Lunchrum, källarvåning, Jupiter");
+                        responsePojo.setResponse3("FT, källarvåning, Svea");
+                        break;
 
                 }
                 break;
