@@ -17,6 +17,9 @@ public class ResponseHandlerService {
     @Autowired
     private PlaceService placeService;
 
+    @Autowired
+    private KokbokenService kokbokenService;
+
     public ResponseHandlerService() {
     }
 
@@ -89,7 +92,18 @@ public class ResponseHandlerService {
 
 
 
+
+
             }
+
+            case "info":
+                switch (keyWord) {
+                    case "kokboken":
+                        kokbokenService.getMenu();
+                        break;
+
+                }
+                break;
 
             default: responsePojo.setResponse1("Jag förstod inte din fråga");
 
