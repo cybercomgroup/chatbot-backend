@@ -1,5 +1,6 @@
 package Application.controller;
 
+import Application.pojo.ResponsePojo;
 import Application.service.ResponseHandlerService;
 import Application.service.ResponseParserService;
 import org.json.JSONObject;
@@ -22,19 +23,22 @@ public class ChatController {
     @Autowired
     private ResponseHandlerService responseHandlerService;
 
+    @Autowired
+    private ResponsePojo responsePojo;
 
     private String request;
 
     @RequestMapping(value = "/request")
     public /*@ResponseBody
-    JSONObject*/ String Request(@RequestParam(value = "request") String request) {
+    JSONObject*/ ResponsePojo Request(@RequestParam(value = "request") String request) {
         this.request = request;
         was.setPhrase(this.request);
 
         JSONObject jobj = was.getJsonResponse();
         responseParserService.setResponse(jobj);
+        responseHandlerService.getResponse();
 
-
-        return "\""+responseHandlerService.getResponse()+"\"";
+        return responsePojo;
+       // return "\""+responseHandlerService.getResponse()+"\"";
     }
 }
