@@ -36,9 +36,7 @@ public class ChatController {
 
         JSONObject jobj = was.getJsonResponse();
         responseParserService.setResponse(jobj);
-
-        responsePojo.setResponse1(responseHandlerService.getResponse());
-        responsePojo.setResponse2(responseHandlerService.getResponse());
+        responseHandlerService.getResponse();
 
         return responsePojo;
        // return "\""+responseHandlerService.getResponse()+"\"";
