@@ -1,3 +1,9 @@
+/**
+ *
+ * @version 2017-11-09
+ * @author Johan Martinson
+ * @author Daniel Rydén
+ */
 package Application.service;
 
 import org.json.JSONException;
@@ -11,12 +17,6 @@ import java.net.URLEncoder;
 import org.springframework.stereotype.Service;
 
 
-/**
- *
- * @version 2017-11-09
- * @author Johan Martinson
- * @author Daniel Rydén
- */
 @Service
 public class WitaiService {
     private static final String url = "https://api.wit.ai/message";
