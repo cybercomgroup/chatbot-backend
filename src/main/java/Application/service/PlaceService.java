@@ -6,12 +6,18 @@
  */
 package Application.service;
 
-import org.springframework.stereotype.Service;
-
+import Application.pojo.ResponsePojo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PlaceService {
@@ -20,6 +26,12 @@ public class PlaceService {
 
     private static final String urlS = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
     private static final String charset = "UTF-8";
+    private String placeOne = null;
+    private String placeTwo = null;
+    private String placeThree = null;
+
+    @Autowired
+    private ResponsePojo responsePojo;
 
     HttpURLConnection connection = null;
 
@@ -27,16 +39,36 @@ public class PlaceService {
 
     }
 
-    private String placeResponse(String query){
+    public void placeResponse(String query){
 
         try {
-            URL url = new URL(urlS + query + KEY);
+            URL url = new URL(urlS + "lindholmen+" + query   + KEY);
             connection = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(connection.getInputStream());
 
-            String temp = getStringFromInputStream(in);
+            JSONObject jsonObject = new JSONObject(new JSONTokener(getStringFromInputStream(in)));
             in.close();
-            return temp;
+
+            JSONArray jsonArray = jsonObject.getJSONArray("results");
+            for(int i = 0; i < jsonArray.length(); i++) {
+                if(placeOne == null) {
+                    placeOne = jsonArray.getJSONObject(i).getString("name");
+                }
+                else if(placeTwo == null) {
+                    placeTwo = jsonArray.getJSONObject(i).getString("name");
+                }
+                else if(placeThree == null) {
+                    placeThree = jsonArray.getJSONObject(i).getString("name");
+                }
+            }
+            responsePojo.setResponse1(placeOne);
+            responsePojo.setResponse2(placeTwo);
+            responsePojo.setResponse3(placeThree);
+            placeOne = null;
+            placeTwo = null;
+            placeThree = null;
+
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -44,7 +76,6 @@ public class PlaceService {
             e.printStackTrace();
         }
 
-        return null;
     }
 
     private String getStringFromInputStream(InputStreamReader in) {
@@ -75,18 +106,7 @@ public class PlaceService {
 /* TODO!: remove after testing is finished
 
  */
-    public static void main(String[] args){
-        String s = "";
-        for(String str: args) {
-            s = s+"+" +str;
-        }
 
-        PlaceService placeService = new PlaceService();
-
-        System.out.println(placeService.placeResponse(s));
-        //System.out.println(placeService.placeResponse(args[0]));
-
-    }
 
 
 }
