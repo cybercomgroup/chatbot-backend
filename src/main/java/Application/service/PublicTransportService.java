@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,7 +115,7 @@ public class PublicTransportService {
                 departureTwo = null;
             }
 
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }

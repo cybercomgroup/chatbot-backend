@@ -120,17 +120,4 @@ public class WitaiService {
             e.printStackTrace();
         }
     }
-    //TODO: remove when testing is done
-    /*public static void main(String[] args){
-        String s = "";
-        for(String str: args) {
-            s = s+" " +str;
-        }
-        System.out.println(s);
-        WitaiService witaiService = new WitaiService();
-        witaiService.setPhrase(s);
-        ResponseParser_pojo rH = new ResponseParser_pojo();
-        rH.setResponse(witaiService.getJsonResponse());
-
-    }*/
 }
