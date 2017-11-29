@@ -1,9 +1,3 @@
-/**
- *
- * @version 2017-11-09
- * @author Johan Martinson
- * @author Daniel Rydén
- */
 package Application.service;
 
 import java.io.BufferedReader;
@@ -20,6 +14,12 @@ import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+/**
+ * @version 2017-11-09
+ * @author Johan Martinson
+ * @author Daniel Rydén
+ */
 @Service
 public class WitaiService {
 
@@ -28,15 +28,13 @@ public class WitaiService {
     private static final String url = "https://api.wit.ai/message";
     private static final String token = "EWFRMP2FXYKOEF4CSSSANDO4F4NTGZCN";
     private static final String charset = "UTF-8";
-    private static String versionParam = "0.0.1";
+    private static final String versionParam = "0.0.1";
 
-    private String query, phrase;
+    private String query;
 
     private URLConnection connection;
 
     private String response;
-
-    private JSONObject jsonObject;
 
     @Autowired
     public WitaiService(ResponseParserService responseParserService) {
@@ -90,16 +88,7 @@ public class WitaiService {
         return stringBuilder.toString();
     }
 
-    public String getStringResponse() {
-        return response;
-    }
-
-    public JSONObject getJsonResponse() {
-        return jsonObject;
-    }
-
     public void setPhrase(String phrase){
-        this.phrase = phrase;
 
         try {
             query = String.format("v=%s&q=%s",
@@ -113,7 +102,7 @@ public class WitaiService {
             response = witResponse(query);
 
         try {
-            jsonObject = new JSONObject(new JSONTokener(response));
+            JSONObject jsonObject = new JSONObject(new JSONTokener(response));
             System.out.println(jsonObject);
             responseParserService.setResponse(jsonObject);
         } catch (JSONException e) {
