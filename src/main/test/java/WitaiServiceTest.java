@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-public class WitaiService {
+public class WitaiServiceTest {
 
 
     @Test

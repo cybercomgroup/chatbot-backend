@@ -1,4 +1,4 @@
-import Application.service.PlaceService;
+import Application.service.*;
 import org.junit.Before;
 import org.junit.Test;
 
