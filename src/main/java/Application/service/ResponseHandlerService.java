@@ -1,10 +1,24 @@
 package Application.service;
 
+import Application.pojo.ResponsePojo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ResponseHandlerService {
     private String intent, keyWord;
+
+    @Autowired
+    private PublicTransportService pts;
+
+    @Autowired
+    private ResponsePojo responsePojo;
+
+    @Autowired
+    private PlaceService placeService;
+
+    @Autowired
+    private KokbokenService kokbokenService;
 
     public ResponseHandlerService() {
     }
@@ -14,36 +28,88 @@ public class ResponseHandlerService {
         this.keyWord = keyWord;
     }
 
-    public String getResponse() {
+    public void getResponse() {
+
+        responsePojo.setResponse1(null);
+        responsePojo.setResponse2(null);
+        responsePojo.setResponse3(null);
+
         switch(intent) {
             case "locate":
                 switch (keyWord) {
-                    case "pizza": return "Nemos!";
-                    case "kaffe": return "Kokboken, Pressbyrån, Cafe blå";
-                    case "thai": return "Thaistugan!";
-                    case "alkohol": return "FT, 11an, Gasquen";
-                    case "FT": return "Svea källarvåing";
-                    case "11an": return "På hörnet av Svea";
-                    case "Gasquen": return "Under kyrkan på campus Johanneberg";
+                    case "pizza":
+                        placeService.placeResponse("pizza");
+                        break;
+                    case "kaffe":
+                        responsePojo.setResponse1("Kokboken");
+                        responsePojo.setResponse2("Pressbyrån");
+                        responsePojo.setResponse3("Café Norra Älvstranden");
+                        break;
+                    case "thai":
+                        placeService.placeResponse("thai");
+                        break;
+                    case "alkohol":
+                        responsePojo.setResponse1("FT");
+                        responsePojo.setResponse2("11an");
+                        responsePojo.setResponse3("Gasquen");
+                        break;
+                    case "FT":
+                        responsePojo.setResponse1("Svea källarvåning");
+                        break;
+                    case "11an":
+                        responsePojo.setResponse1("På hörnet av Svea");
+                        break;
+                    case "Gasquen":
+                        responsePojo.setResponse1("Under kyrkan på campus Johanneberg");
+                        break;
+                    case "Micro":
+                        responsePojo.setResponse1("Loungen, tredje våningen, Jupiter");
+                        responsePojo.setResponse2("Lunchrum, källarvåning, Jupiter");
+                        responsePojo.setResponse3("FT, källarvåning, Svea");
+                        break;
 
                 }
+                break;
 
             case "tid": {
                 switch (keyWord) {
-                    case "Gasquen": return "22:00!";
-                    case "11an": return "15:00!";
-                    case "16": return "cablamo";
+                    case "Gasquen":
+                        responsePojo.setResponse1("22:00!");
+                        break;
+                    case "11an":
+                        responsePojo.setResponse1("15:00!");
+                        break;
+                    case "16":
+                        pts.setBus("16");
+                        pts.getDepature();
+                        break;
+                    case "55":
+                        pts.setBus("55");
+                        pts.getDepature();
+                        break;
                 }
+                break;
+
+
 
 
 
             }
 
-            case "": return "Jag förstod inte din fråga";
+            case "info":
+                switch (keyWord) {
+                    case "kokboken":
+                        kokbokenService.getMenu();
+                        break;
+
+                }
+                break;
+
+            default: responsePojo.setResponse1("Jag förstod inte din fråga");
+
 
         }
-        return "Jag förstod inte din fråga";
     }
 
-// IntentResolveService
+
 }
