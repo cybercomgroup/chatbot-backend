@@ -17,7 +17,7 @@ public class VasttrafikTokenService {
 
     public VasttrafikTokenService() {}
 
-    public String fetchToken() {
+    String fetchToken() {
         try {
             URL obj = new URL(url);
             HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
@@ -33,7 +33,7 @@ public class VasttrafikTokenService {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
@@ -50,7 +50,7 @@ public class VasttrafikTokenService {
 
     }
 
-    public String tokenParser(String response){
+    String tokenParser(String response){
         try {
             JSONObject jsonObject = new JSONObject(new JSONTokener(response));
             return jsonObject.getString("access_token");

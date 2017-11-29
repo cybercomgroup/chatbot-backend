@@ -32,7 +32,7 @@ public class KokbokenService {
     }
 
 
-    public void getMenu() {
+    void getMenu() {
         try {
             OkHttpClient client = new OkHttpClient();
 
@@ -45,7 +45,7 @@ public class KokbokenService {
             Response response = client.newCall(request).execute();
             BufferedReader in = new BufferedReader(new InputStreamReader(response.body().byteStream()));
             String inputLine;
-            StringBuffer stringBuffer = new StringBuffer();
+            StringBuilder stringBuffer = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
                 stringBuffer.append(inputLine);

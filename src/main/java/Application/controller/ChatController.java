@@ -15,8 +15,6 @@ public class ChatController {
 
     private final ResponsePojo responsePojo;
 
-    private String request;
-
     @Autowired
     public ChatController(WitaiService was, ResponsePojo responsePojo) {
         this.was = was;
@@ -25,8 +23,8 @@ public class ChatController {
 
     @RequestMapping(value = "/request")
     public ResponsePojo Request(@RequestParam(value = "request") String request) {
-        this.request = request;
-        was.setPhrase(this.request);
+        String request1 = request;
+        was.setPhrase(request1);
 
         return responsePojo;
     }

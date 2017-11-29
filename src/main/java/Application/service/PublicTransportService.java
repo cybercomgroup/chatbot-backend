@@ -20,9 +20,8 @@ public class PublicTransportService {
 
     private final VasttrafikTokenService vts;
 
-    public final ResponsePojo responsePojo;
+    private final ResponsePojo responsePojo;
 
-    private Date date;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'&time='HH'%3A'mm");
     private String bus;
     private String departureOne;
@@ -35,13 +34,13 @@ public class PublicTransportService {
         this.responsePojo = responsePojo;
     }
 
-    public void getDepature() {
-        date = new Date();
+    void getDepature() {
+        Date date = new Date();
 
         String url16 = "https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=9021014004490000&date=" + dateFormat.format(date);
         String url55 = "https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=9021014006675000&date=" + dateFormat.format(date);
 
-        HttpsURLConnection connection = null;
+        HttpsURLConnection connection;
         try {
             if (bus.equals("16")) {
 
@@ -52,7 +51,7 @@ public class PublicTransportService {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-                StringBuffer response = new StringBuffer();
+                StringBuilder response = new StringBuilder();
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
@@ -91,7 +90,7 @@ public class PublicTransportService {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-                StringBuffer response = new StringBuffer();
+                StringBuilder response = new StringBuilder();
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
@@ -126,7 +125,7 @@ public class PublicTransportService {
             e.printStackTrace();
         }
     }
-    public void setBus(String bus) {
+    void setBus(String bus) {
         this.bus = bus;
     }
 }

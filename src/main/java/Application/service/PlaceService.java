@@ -1,9 +1,4 @@
-/**
- *
- * @version 2017-11-22
- * @author Johan Martinson
- * @author Daniel Rydén
- */
+
 package Application.service;
 
 import Application.pojo.ResponsePojo;
@@ -19,6 +14,11 @@ import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @version 2017-11-22
+ * @author Johan Martinson
+ * @author Daniel Rydén
+ */
 @Service
 public class PlaceService {
 
@@ -27,12 +27,9 @@ public class PlaceService {
     private static final String KEY = "&key=AIzaSyAldrk8h5ElMPKxI5p3yiw1SwoSRMt6Vkw";
 
     private static final String urlS = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
-    private static final String charset = "UTF-8";
     private String placeOne = null;
     private String placeTwo = null;
     private String placeThree = null;
-
-    private HttpURLConnection connection = null;
 
     @Autowired
     public PlaceService(ResponsePojo responsePojo){
@@ -40,11 +37,11 @@ public class PlaceService {
         this.responsePojo = responsePojo;
     }
 
-    public void placeResponse(String query){
+    void placeResponse(String query){
 
         try {
             URL url = new URL(urlS + "lindholmen+" + query   + KEY);
-            connection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(connection.getInputStream());
 
             JSONObject jsonObject = new JSONObject(new JSONTokener(getStringFromInputStream(in)));
