@@ -4,33 +4,35 @@ import Application.pojo.ResponsePojo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class KokbokenService {
 
-    private static final String url = "http://carboncloudrestaurantapi.azurewebsites.net/api/menuscreen/getdataweek?restaurantid=35";
+    private final ResponsePojo responsePojo;
+
     private String menuItemOne;
     private String menuItemTwo;
-    @Autowired
-    private ResponsePojo responsePojo;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+    @Autowired
+    public KokbokenService(ResponsePojo responsePojo) {
+        this.responsePojo = responsePojo;
+    }
 
-    public void getMenu() {
+
+    void getMenu() {
         try {
             OkHttpClient client = new OkHttpClient();
 
@@ -43,7 +45,7 @@ public class KokbokenService {
             Response response = client.newCall(request).execute();
             BufferedReader in = new BufferedReader(new InputStreamReader(response.body().byteStream()));
             String inputLine;
-            StringBuffer stringBuffer = new StringBuffer();
+            StringBuilder stringBuffer = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
                 stringBuffer.append(inputLine);
@@ -62,14 +64,7 @@ public class KokbokenService {
             }
             responsePojo.setResponse1(menuItemOne);
             responsePojo.setResponse2(menuItemTwo);
-
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }

@@ -10,9 +10,7 @@ public class ResponsePojo {
     private String response3;
 
 
-    public void setResponse1(String response1) {
-        this.response1 = response1;
-    }
+    public void setResponse1(String response1) { this.response1 = response1; }
 
     public void setResponse2(String response2) {
         this.response2 = response2;
@@ -22,9 +20,7 @@ public class ResponsePojo {
         this.response3 = response3;
     }
 
-    public String getResponse1() {
-        return response1;
-    }
+    public String getResponse1() { return response1; }
 
     public String getResponse2() {
         return response2;

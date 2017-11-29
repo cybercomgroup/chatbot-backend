@@ -1,9 +1,4 @@
-/**
- *
- * @version 2017-11-22
- * @author Johan Martinson
- * @author Daniel Rydén
- */
+
 package Application.service;
 
 import Application.pojo.ResponsePojo;
@@ -11,39 +6,42 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @version 2017-11-22
+ * @author Johan Martinson
+ * @author Daniel Rydén
+ */
 @Service
 public class PlaceService {
+
+    private final ResponsePojo responsePojo;
 
     private static final String KEY = "&key=AIzaSyAldrk8h5ElMPKxI5p3yiw1SwoSRMt6Vkw";
 
     private static final String urlS = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
-    private static final String charset = "UTF-8";
     private String placeOne = null;
     private String placeTwo = null;
     private String placeThree = null;
 
     @Autowired
-    private ResponsePojo responsePojo;
+    public PlaceService(ResponsePojo responsePojo){
 
-    HttpURLConnection connection = null;
-
-    public PlaceService(){
-
+        this.responsePojo = responsePojo;
     }
 
-    public void placeResponse(String query){
+    void placeResponse(String query){
 
         try {
             URL url = new URL(urlS + "lindholmen+" + query   + KEY);
-            connection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(connection.getInputStream());
 
             JSONObject jsonObject = new JSONObject(new JSONTokener(getStringFromInputStream(in)));
@@ -68,11 +66,7 @@ public class PlaceService {
             placeTwo = null;
             placeThree = null;
 
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
 
@@ -101,12 +95,4 @@ public class PlaceService {
         }
         return stringBuilder.toString();
     }
-
-
-/* TODO!: remove after testing is finished
-
- */
-
-
-
 }

@@ -1,17 +1,15 @@
 package Application.service;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-import org.springframework.stereotype.Service;
-
-import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.springframework.stereotype.Service;
 
 @Service
 public class VasttrafikTokenService {
@@ -19,7 +17,7 @@ public class VasttrafikTokenService {
 
     public VasttrafikTokenService() {}
 
-    public String fetchToken() {
+    String fetchToken() {
         try {
             URL obj = new URL(url);
             HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
@@ -35,7 +33,7 @@ public class VasttrafikTokenService {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
@@ -45,8 +43,6 @@ public class VasttrafikTokenService {
             return response.toString();
 
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +50,7 @@ public class VasttrafikTokenService {
 
     }
 
-    public String tokenParser(String response){
+    String tokenParser(String response){
         try {
             JSONObject jsonObject = new JSONObject(new JSONTokener(response));
             return jsonObject.getString("access_token");

@@ -1,44 +1,31 @@
 package Application.controller;
 
 import Application.pojo.ResponsePojo;
-import Application.service.ResponseHandlerService;
-import Application.service.ResponseParserService;
-import org.json.JSONObject;
+import Application.service.WitaiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import Application.service.*;
 
 @RestController
 @RequestMapping(value = "/chatbot")
 public class ChatController {
 
-    @Autowired
-    private WitaiService was;
+    private final WitaiService was;
+
+    private final ResponsePojo responsePojo;
 
     @Autowired
-    private ResponseParserService responseParserService /*= new ResponseParser_pojo()*/;
-
-    @Autowired
-    private ResponseHandlerService responseHandlerService;
-
-    @Autowired
-    private ResponsePojo responsePojo;
-
-    private String request;
+    public ChatController(WitaiService was, ResponsePojo responsePojo) {
+        this.was = was;
+        this.responsePojo = responsePojo;
+    }
 
     @RequestMapping(value = "/request")
-    public /*@ResponseBody
-    JSONObject*/ ResponsePojo Request(@RequestParam(value = "request") String request) {
-        this.request = request;
-        was.setPhrase(this.request);
-
-        JSONObject jobj = was.getJsonResponse();
-        responseParserService.setResponse(jobj);
-        responseHandlerService.getResponse();
+    public ResponsePojo Request(@RequestParam(value = "request") String request) {
+        String request1 = request;
+        was.setPhrase(request1);
 
         return responsePojo;
-       // return "\""+responseHandlerService.getResponse()+"\"";
     }
 }
