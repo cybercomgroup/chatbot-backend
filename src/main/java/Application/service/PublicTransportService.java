@@ -27,6 +27,7 @@ public class PublicTransportService {
     private String bus;
     private String departureOne;
     private String departureTwo;
+    private String departureThree;
 
     @Autowired
     public PublicTransportService(VasttrafikTokenService vts, ResponsePojo responsePojo){
@@ -70,14 +71,17 @@ public class PublicTransportService {
                             departureOne = temp.getString("time");
                         else if(departureTwo == null)
                             departureTwo = temp.getString("time");
-
+                        else if(departureThree == null)
+                            departureThree = temp.getString("time");
 
                     }
                 }
                 responsePojo.setResponse1(departureOne);
                 responsePojo.setResponse2(departureTwo);
+                responsePojo.setResponse3(departureThree);
                 departureOne = null;
                 departureTwo = null;
+                departureThree = null;
 
             } else if (bus.equals("55")) {
                 URL obj = new URL(url55);
@@ -96,7 +100,6 @@ public class PublicTransportService {
                 in.close();
                 JSONObject jsonObject = XML.toJSONObject(response.toString());
 
-                System.out.println(jsonObject);
                 jsonObject = jsonObject.getJSONObject("DepartureBoard");
                 JSONArray jsonArray = jsonObject.getJSONArray("Departure");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -105,14 +108,18 @@ public class PublicTransportService {
                         if(departureOne == null)
                             departureOne = temp.getString("time");
                         else if(departureTwo == null)
-                            departureTwo = (temp.getString("time"));
+                            departureTwo = temp.getString("time");
+                        else if(departureThree == null)
+                            departureThree = temp.getString("time");
                     }
                 }
 
                 responsePojo.setResponse1(departureOne);
                 responsePojo.setResponse2(departureTwo);
+                responsePojo.setResponse3(departureThree);
                 departureOne = null;
                 departureTwo = null;
+                departureThree = null;
             }
 
         } catch (IOException | JSONException e) {
