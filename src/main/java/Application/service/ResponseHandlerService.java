@@ -69,7 +69,7 @@ public class ResponseHandlerService {
                         responsePojo.setResponse2("Lunchrum, källarvåning, Jupiter");
                         responsePojo.setResponse3("FT, källarvåning, Svea");
                         break;
-
+                    default: responsePojo.setResponse1("Kan inte hitta " + keyWord);
 
                 }
                 break;
@@ -91,7 +91,7 @@ public class ResponseHandlerService {
                         pts.getDepature();
                         break;
 
-
+                    default: responsePojo.setResponse1("Det finns inga tider för " + keyWord);
                 }
                 break;
 
@@ -106,7 +106,7 @@ public class ResponseHandlerService {
                     case "kokboken":
                         kokbokenService.getMenu();
                         break;
-
+                    default: responsePojo.setResponse1("Det finns ingen information om " + keyWord);
                 }
                 break;
 
