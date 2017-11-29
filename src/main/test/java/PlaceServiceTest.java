@@ -21,9 +21,9 @@ public class PlaceServiceTest {
         PlaceService placeService = new PlaceService();
         placeService.placeResponse("pizza");
 
-        assertTrue(responsePojo.getResponse1() == "Kapten Nemo's Resturang Pizzeria" ||
-                responsePojo.getResponse2() == "Kapten Nemo's Resturang Pizzeria" ||
-                responsePojo.getResponse3() == "Kapten Nemo's Resturang Pizzeria"
+        assertTrue(responsePojo.getResponse1().equals("Kapten Nemo's Resturang Pizzeria") ||
+                responsePojo.getResponse2().equals("Kapten Nemo's Resturang Pizzeria")||
+                responsePojo.getResponse3().equals("Kapten Nemo's Resturang Pizzeria")
         );
 
     }
