@@ -129,6 +129,6 @@ $RECYCLE.BIN/
 .idea/inspectionProfiles/
 .idea/vcs.xml
 src/main/resources/
-src/test/
 target/
 .idea/emacs.xml
+
