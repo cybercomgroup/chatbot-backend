@@ -25,12 +25,12 @@ public class ResponseHandlerService {
         this.kokbokenService = kokbokenService;
     }
 
-    public void setIntentAndKeyWord(String intent, String keyWord) {
+    void setIntentAndKeyWord(String intent, String keyWord) {
         this.intent = intent;
         this.keyWord = keyWord;
     }
 
-    public void getResponse() {
+    void getResponse() {
 
         responsePojo.setResponse1(null);
         responsePojo.setResponse2(null);
