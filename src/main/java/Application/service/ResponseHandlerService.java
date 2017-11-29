@@ -8,19 +8,21 @@ import org.springframework.stereotype.Service;
 public class ResponseHandlerService {
     private String intent, keyWord;
 
-    @Autowired
-    private PublicTransportService pts;
+    private final PublicTransportService pts;
+
+    private final ResponsePojo responsePojo;
+
+    private final PlaceService placeService;
+
+    private final KokbokenService kokbokenService;
 
     @Autowired
-    private ResponsePojo responsePojo;
-
-    @Autowired
-    private PlaceService placeService;
-
-    @Autowired
-    private KokbokenService kokbokenService;
-
-    public ResponseHandlerService() {
+    public ResponseHandlerService(PublicTransportService pts, ResponsePojo responsePojo,
+            PlaceService placeService, KokbokenService kokbokenService) {
+        this.pts = pts;
+        this.responsePojo = responsePojo;
+        this.placeService = placeService;
+        this.kokbokenService = kokbokenService;
     }
 
     public void setIntentAndKeyWord(String intent, String keyWord) {

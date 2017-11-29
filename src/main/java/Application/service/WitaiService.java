@@ -20,12 +20,10 @@ import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class WitaiService {
 
-    @Autowired
-    private ResponseParserService responseParserService;
+    private final ResponseParserService responseParserService;
 
     private static final String url = "https://api.wit.ai/message";
     private static final String token = "EWFRMP2FXYKOEF4CSSSANDO4F4NTGZCN";
@@ -40,8 +38,10 @@ public class WitaiService {
 
     private JSONObject jsonObject;
 
-    public WitaiService() {
+    @Autowired
+    public WitaiService(ResponseParserService responseParserService) {
 
+        this.responseParserService = responseParserService;
     }
 
     private String witResponse(String query) {

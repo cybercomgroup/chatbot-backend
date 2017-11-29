@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/chatbot")
 public class ChatController {
 
-    @Autowired
-    private WitaiService was;
+    private final WitaiService was;
 
-    @Autowired
-    private ResponsePojo responsePojo;
+    private final ResponsePojo responsePojo;
 
     private String request;
+
+    @Autowired
+    public ChatController(WitaiService was, ResponsePojo responsePojo) {
+        this.was = was;
+        this.responsePojo = responsePojo;
+    }
 
     @RequestMapping(value = "/request")
     public ResponsePojo Request(@RequestParam(value = "request") String request) {

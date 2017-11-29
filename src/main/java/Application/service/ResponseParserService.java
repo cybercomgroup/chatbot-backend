@@ -11,11 +11,12 @@ public class ResponseParserService {
     private JSONObject response;
     private String intent = "", keyWord = "";
 
+    private final ResponseHandlerService responseHandlerService;
+
     @Autowired
-    private ResponseHandlerService responseHandlerService;
+    public ResponseParserService(ResponseHandlerService responseHandlerService) {
 
-    public ResponseParserService() {
-
+        this.responseHandlerService = responseHandlerService;
     }
 
     public String getIntent() {

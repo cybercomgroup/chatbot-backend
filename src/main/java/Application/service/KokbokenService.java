@@ -18,13 +18,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class KokbokenService {
 
-    @Autowired
-    private ResponsePojo responsePojo;
+    private final ResponsePojo responsePojo;
 
     private String menuItemOne;
     private String menuItemTwo;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    @Autowired
+    public KokbokenService(ResponsePojo responsePojo) {
+        this.responsePojo = responsePojo;
+    }
 
 
     public void getMenu() {

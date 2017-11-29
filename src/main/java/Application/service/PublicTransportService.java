@@ -17,11 +17,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PublicTransportService {
 
-    @Autowired
-    private VasttrafikTokenService vts;
+    private final VasttrafikTokenService vts;
 
-    @Autowired
-    public ResponsePojo responsePojo;
+    public final ResponsePojo responsePojo;
 
     private Date date;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'&time='HH'%3A'mm");
@@ -29,7 +27,10 @@ public class PublicTransportService {
     private String departureOne;
     private String departureTwo;
 
-    public PublicTransportService(){
+    @Autowired
+    public PublicTransportService(VasttrafikTokenService vts, ResponsePojo responsePojo){
+        this.vts = vts;
+        this.responsePojo = responsePojo;
     }
 
     public void getDepature() {

@@ -21,8 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlaceService {
 
-    @Autowired
-    private ResponsePojo responsePojo;
+    private final ResponsePojo responsePojo;
 
     private static final String KEY = "&key=AIzaSyAldrk8h5ElMPKxI5p3yiw1SwoSRMt6Vkw";
 
@@ -34,8 +33,10 @@ public class PlaceService {
 
     private HttpURLConnection connection = null;
 
-    public PlaceService(){
+    @Autowired
+    public PlaceService(ResponsePojo responsePojo){
 
+        this.responsePojo = responsePojo;
     }
 
     public void placeResponse(String query){
