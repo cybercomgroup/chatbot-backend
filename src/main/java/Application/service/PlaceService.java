@@ -1,0 +1,112 @@
+/**
+ *
+ * @version 2017-11-22
+ * @author Johan Martinson
+ * @author Daniel Rydén
+ */
+package Application.service;
+
+import Application.pojo.ResponsePojo;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PlaceService {
+
+    private static final String KEY = "&key=AIzaSyAldrk8h5ElMPKxI5p3yiw1SwoSRMt6Vkw";
+
+    private static final String urlS = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
+    private static final String charset = "UTF-8";
+    private String placeOne = null;
+    private String placeTwo = null;
+    private String placeThree = null;
+
+    @Autowired
+    private ResponsePojo responsePojo;
+
+    HttpURLConnection connection = null;
+
+    public PlaceService(){
+
+    }
+
+    public void placeResponse(String query){
+
+        try {
+            URL url = new URL(urlS + "lindholmen+" + query   + KEY);
+            connection = (HttpURLConnection) url.openConnection();
+            InputStreamReader in = new InputStreamReader(connection.getInputStream());
+
+            JSONObject jsonObject = new JSONObject(new JSONTokener(getStringFromInputStream(in)));
+            in.close();
+
+            JSONArray jsonArray = jsonObject.getJSONArray("results");
+            for(int i = 0; i < jsonArray.length(); i++) {
+                if(placeOne == null) {
+                    placeOne = jsonArray.getJSONObject(i).getString("name");
+                }
+                else if(placeTwo == null) {
+                    placeTwo = jsonArray.getJSONObject(i).getString("name");
+                }
+                else if(placeThree == null) {
+                    placeThree = jsonArray.getJSONObject(i).getString("name");
+                }
+            }
+            responsePojo.setResponse1(placeOne);
+            responsePojo.setResponse2(placeTwo);
+            responsePojo.setResponse3(placeThree);
+            placeOne = null;
+            placeTwo = null;
+            placeThree = null;
+
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private String getStringFromInputStream(InputStreamReader in) {
+        BufferedReader bufferedReader = null;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        String line;
+
+        try{
+            bufferedReader = new BufferedReader(in);
+            while ((line = bufferedReader.readLine())!=null)
+                stringBuilder.append(line);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (bufferedReader != null){
+                try{
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+
+/* TODO!: remove after testing is finished
+
+ */
+
+
+
+}
