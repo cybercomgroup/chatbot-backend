@@ -68,6 +68,7 @@ public class ResponseHandlerService {
                         responsePojo.setResponse3("FT, källarvåning, Svea");
                         break;
 
+
                 }
                 break;
 
@@ -87,6 +88,8 @@ public class ResponseHandlerService {
                         pts.setBus("55");
                         pts.getDepature();
                         break;
+
+
                 }
                 break;
 
@@ -106,10 +109,6 @@ public class ResponseHandlerService {
                 break;
 
             default: responsePojo.setResponse1("Jag förstod inte din fråga");
-
-
         }
     }
-
-
 }

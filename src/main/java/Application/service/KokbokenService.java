@@ -4,8 +4,6 @@ import Application.pojo.ResponsePojo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import okhttp3.OkHttpClient;
@@ -17,15 +15,14 @@ import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class KokbokenService {
 
-    private static final String url = "http://carboncloudrestaurantapi.azurewebsites.net/api/menuscreen/getdataweek?restaurantid=35";
-    private String menuItemOne;
-    private String menuItemTwo;
     @Autowired
     private ResponsePojo responsePojo;
+
+    private String menuItemOne;
+    private String menuItemTwo;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -62,13 +59,6 @@ public class KokbokenService {
             }
             responsePojo.setResponse1(menuItemOne);
             responsePojo.setResponse2(menuItemTwo);
-
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

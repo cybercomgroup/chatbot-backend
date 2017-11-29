@@ -11,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,6 +21,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlaceService {
 
+    @Autowired
+    private ResponsePojo responsePojo;
+
     private static final String KEY = "&key=AIzaSyAldrk8h5ElMPKxI5p3yiw1SwoSRMt6Vkw";
 
     private static final String urlS = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
@@ -30,10 +32,7 @@ public class PlaceService {
     private String placeTwo = null;
     private String placeThree = null;
 
-    @Autowired
-    private ResponsePojo responsePojo;
-
-    HttpURLConnection connection = null;
+    private HttpURLConnection connection = null;
 
     public PlaceService(){
 
@@ -68,10 +67,6 @@ public class PlaceService {
             placeTwo = null;
             placeThree = null;
 
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,12 +96,4 @@ public class PlaceService {
         }
         return stringBuilder.toString();
     }
-
-
-/* TODO!: remove after testing is finished
-
- */
-
-
-
 }

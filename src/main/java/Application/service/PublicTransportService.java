@@ -1,21 +1,18 @@
 package Application.service;
 
 import Application.pojo.ResponsePojo;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Service
 public class PublicTransportService {
@@ -31,8 +28,6 @@ public class PublicTransportService {
     private String bus;
     private String departureOne;
     private String departureTwo;
-    // SimpleDateFormat timeFormat = new SimpleDateFormat("");
-
 
     public PublicTransportService(){
     }
@@ -118,11 +113,6 @@ public class PublicTransportService {
                 departureTwo = null;
             }
 
-
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

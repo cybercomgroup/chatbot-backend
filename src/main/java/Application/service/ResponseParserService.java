@@ -1,10 +1,8 @@
 package Application.service;
 
+import java.util.Iterator;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Iterator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +60,7 @@ public class ResponseParserService {
             }
         }
         responseHandlerService.setIntentAndKeyWord(intent, keyWord);
+        responseHandlerService.getResponse();
 
     }
 }
