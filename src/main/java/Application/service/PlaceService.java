@@ -99,12 +99,4 @@ public class PlaceService {
         }
         return stringBuilder.toString();
     }
-
-
-/* TODO!: remove after testing is finished
-
- */
-
-
-
 }

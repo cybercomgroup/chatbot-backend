@@ -1,30 +1,49 @@
 import Application.service.*;
 import Application.pojo.*;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertTrue;
 
+import static org.junit.Assert.assertEquals;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {PlaceServiceTest.PlaceServiceTestConfiguration.class})
 public class PlaceServiceTest {
 
+    private PlaceService placeService;
 
-    @Before
-    public void init(){
 
+    @Autowired
+    public void init(PlaceService placeService){
+        this.placeService = placeService;
     }
 
     @Test
     public void placeResponseTest(){
-        String pizza = "pizza";
 
-        ResponsePojo responsePojo = new ResponsePojo();
-        PlaceService placeService = new PlaceService();
         placeService.placeResponse("pizza");
 
-        assertTrue(responsePojo.getResponse1().equals("Kapten Nemo's Resturang Pizzeria") ||
-                responsePojo.getResponse2().equals("Kapten Nemo's Resturang Pizzeria")||
-                responsePojo.getResponse3().equals("Kapten Nemo's Resturang Pizzeria")
-        );
+        assertEquals(responsePojo.getResponse1(), "Kapten Nemo's Resturang Pizzeria");
 
+    }
+
+
+    @Configuration
+    public class PlaceServiceTestConfiguration{
+
+        @Bean
+        ResponsePojo responsePojo(){
+            return new ResponsePojo();
+        }
+
+        @Bean
+        PlaceService placeService(){
+            return new PlaceService();
+        }
     }
 }
