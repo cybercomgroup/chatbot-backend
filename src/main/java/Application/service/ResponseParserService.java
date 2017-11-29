@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ResponseParserService {
-    private JSONObject response;
     private String intent = "", keyWord = "";
 
     private final ResponseHandlerService responseHandlerService;
@@ -19,16 +18,7 @@ public class ResponseParserService {
         this.responseHandlerService = responseHandlerService;
     }
 
-    public String getIntent() {
-        return intent;
-    }
-
-    public String getKeyWord() {
-        return keyWord;
-    }
-
-    public void setResponse(JSONObject response) {
-        this.response = response;
+    void setResponse(JSONObject response) {
         intent = "";
         keyWord = "";
         try {
@@ -39,10 +29,11 @@ public class ResponseParserService {
     }
 
     private void parseQuery(JSONObject query) throws JSONException {
-        Iterator<String> it = query.getJSONObject("entities").keys();
+
+        Iterator it = query.getJSONObject("entities").keys();
 
         while(it.hasNext()) {
-            switch (it.next()) {
+            switch (it.next().toString()) {
                 case "intent":
                     intent = query.getJSONObject("entities").getJSONArray("intent").getJSONObject(0).getString("value");
                     break;
@@ -55,8 +46,6 @@ public class ResponseParserService {
                 case "plats":
                     keyWord = query.getJSONObject("entities").getJSONArray("plats").getJSONObject(0).getString("value");
                     break;
-
-
 
             }
         }
