@@ -1,40 +1,45 @@
 package Application.service;
 
-import Application.pojo.ResponseParser_pojo;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 /**
- *
  * @version 2017-11-09
  * @author Johan Martinson
  * @author Daniel Rydén
  */
 @Service
 public class WitaiService {
+
+    private final ResponseParserService responseParserService;
+
     private static final String url = "https://api.wit.ai/message";
     private static final String token = "EWFRMP2FXYKOEF4CSSSANDO4F4NTGZCN";
     private static final String charset = "UTF-8";
-    private static String versionParam = "0.0.1";
+    private static final String versionParam = "0.0.1";
 
-    private String query, phrase;
+    private String query;
 
     private URLConnection connection;
 
     private String response;
 
-    private JSONObject jsonObject;
+    @Autowired
+    public WitaiService(ResponseParserService responseParserService) {
 
-    public WitaiService() {
-
+        this.responseParserService = responseParserService;
     }
 
     private String witResponse(String query) {
@@ -83,16 +88,7 @@ public class WitaiService {
         return stringBuilder.toString();
     }
 
-    public String getStringResponse() {
-        return response;
-    }
-
-    public JSONObject getJsonResponse() {
-        return jsonObject;
-    }
-
     public void setPhrase(String phrase){
-        this.phrase = phrase;
 
         try {
             query = String.format("v=%s&q=%s",
@@ -106,23 +102,11 @@ public class WitaiService {
             response = witResponse(query);
 
         try {
-            jsonObject = new JSONObject(new JSONTokener(response));
+            JSONObject jsonObject = new JSONObject(new JSONTokener(response));
             System.out.println(jsonObject);
+            responseParserService.setResponse(jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-    //TODO: remove when testing is done
-    /*public static void main(String[] args){
-        String s = "";
-        for(String str: args) {
-            s = s+" " +str;
-        }
-        System.out.println(s);
-        WitaiService witaiService = new WitaiService();
-        witaiService.setPhrase(s);
-        ResponseParser_pojo rH = new ResponseParser_pojo();
-        rH.setResponse(witaiService.getJsonResponse());
-
-    }*/
 }
