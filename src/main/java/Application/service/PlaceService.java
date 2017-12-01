@@ -40,7 +40,7 @@ public class PlaceService {
     void placeResponse(String query){
 
         try {
-            URL url = new URL(urlS + "lindholmen+" + query   + KEY);
+            URL url = new URL(urlS + "lindholmen+" + query + KEY);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(connection.getInputStream());
 
@@ -58,6 +58,18 @@ public class PlaceService {
                 else if(placeThree == null) {
                     placeThree = jsonArray.getJSONObject(i).getString("name");
                 }
+            }
+
+            System.out.println(jsonObject);
+
+            if(placeOne == null){
+                placeOne = "";
+            }
+            if(placeTwo == null){
+                placeTwo = "";
+            }
+            if(placeThree == null){
+                placeThree = "";
             }
             responsePojo.setResponse("Du kan hitta " + query + " vid: \n" +  placeOne + "\n"
                     + placeTwo + "\n" + placeThree);
