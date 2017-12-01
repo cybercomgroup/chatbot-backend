@@ -75,9 +75,9 @@ public class PublicTransportService {
 
                     }
                 }
-                responsePojo.setResponse1(departureOne);
-                responsePojo.setResponse2(departureTwo);
-                responsePojo.setResponse3(departureThree);
+                responsePojo.setResponse(departureOne);
+                //responsePojo.setResponse2(departureTwo);
+                //responsePojo.setResponse3(departureThree);
                 departureOne = null;
                 departureTwo = null;
                 departureThree = null;
@@ -113,9 +113,9 @@ public class PublicTransportService {
                     }
                 }
 
-                responsePojo.setResponse1(departureOne);
-                responsePojo.setResponse2(departureTwo);
-                responsePojo.setResponse3(departureThree);
+                responsePojo.setResponse(departureOne);
+                //responsePojo.setResponse2(departureTwo);
+                //responsePojo.setResponse3(departureThree);
                 departureOne = null;
                 departureTwo = null;
                 departureThree = null;

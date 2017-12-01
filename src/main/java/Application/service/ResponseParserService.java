@@ -46,9 +46,15 @@ public class ResponseParserService {
                 case "plats":
                     keyWord = query.getJSONObject("entities").getJSONArray("plats").getJSONObject(0).getString("value");
                     break;
-
+                case "droopy":
+                    keyWord = query.getJSONObject("entities").getJSONArray("droopy").getJSONObject(0).getString("value");
+                    break;
+                case "mikro":
+                    keyWord = query.getJSONObject("entities").getJSONArray("mikro").getJSONObject(0).getString("value");
+                    break;
             }
         }
+        System.out.println(keyWord);
         responseHandlerService.setIntentAndKeyWord(intent, keyWord);
         responseHandlerService.getResponse();
 

@@ -32,9 +32,9 @@ public class ResponseHandlerService {
 
     void getResponse() {
 
-        responsePojo.setResponse1(null);
-        responsePojo.setResponse2(null);
-        responsePojo.setResponse3(null);
+        responsePojo.setResponse(null);
+        //responsePojo.setResponse2(null);
+        //responsePojo.setResponse3(null);
 
         switch(intent) {
             case "locate":
@@ -43,33 +43,34 @@ public class ResponseHandlerService {
                         placeService.placeResponse("pizza");
                         break;
                     case "kaffe":
-                        responsePojo.setResponse1("Kokboken");
-                        responsePojo.setResponse2("Pressbyrån");
-                        responsePojo.setResponse3("Café Norra Älvstranden");
+                        placeService.placeResponse("kaffe");
                         break;
                     case "thai":
                         placeService.placeResponse("thai");
                         break;
                     case "alkohol":
-                        responsePojo.setResponse1("FT");
-                        responsePojo.setResponse2("11an");
-                        responsePojo.setResponse3("Gasquen");
+                        responsePojo.setResponse("Det finns många flytande delikatesser vid: \n11:an \nGasquen \neller FT");
                         break;
                     case "FT":
-                        responsePojo.setResponse1("Svea källarvåning");
+                        responsePojo.setResponse("Svea källarvåning");
                         break;
                     case "11an":
-                        responsePojo.setResponse1("På hörnet av Svea");
+                        responsePojo.setResponse("På hörnet av Svea");
                         break;
                     case "Gasquen":
-                        responsePojo.setResponse1("Under kyrkan på campus Johanneberg");
+                        responsePojo.setResponse("Under kyrkan på campus Johanneberg");
                         break;
-                    case "Micro":
-                        responsePojo.setResponse1("Loungen, tredje våningen, Jupiter");
-                        responsePojo.setResponse2("Lunchrum, källarvåning, Jupiter");
-                        responsePojo.setResponse3("FT, källarvåning, Svea");
+                    case "mikro":
+                        responsePojo.setResponse("Mirkovågsugnar finns vid: \nLoungen, tredje våningen, "
+                                + "Jupiter \nLunchrummet, källarvåning, Jupiter \nFT, källarvåning, Svea");
                         break;
-                    default: responsePojo.setResponse1("Kan inte hitta " + keyWord);
+                    default:
+                        if (keyWord.equals(null) || !keyWord.equals("")) {
+                            placeService.placeResponse(keyWord);
+                        } else {
+                            responsePojo.setResponse("Jag förstod inte din fråga");
+                        }
+
 
                 }
                 break;
@@ -77,10 +78,10 @@ public class ResponseHandlerService {
             case "tid": {
                 switch (keyWord) {
                     case "Gasquen":
-                        responsePojo.setResponse1("22:00!");
+                        responsePojo.setResponse("22:00!");
                         break;
                     case "11an":
-                        responsePojo.setResponse1("15:00!");
+                        responsePojo.setResponse("15:00!");
                         break;
                     case "16":
                         pts.setBus("16");
@@ -91,26 +92,44 @@ public class ResponseHandlerService {
                         pts.getDepature();
                         break;
 
-                    default: responsePojo.setResponse1("Det finns inga tider för " + keyWord);
+                    default: responsePojo.setResponse("Det finns inga tider för " + keyWord);
                 }
                 break;
-
-
-
-
-
             }
+
+            case "special":
+                switch (keyWord) {
+                    case "H":
+                        responsePojo.setResponse("H!");
+                        break;
+                    case "cerise":
+                        responsePojo.setResponse("Cerise!");
+                        break;
+                    case  "droopy":
+                        responsePojo.setResponse("Droopy!");
+                        break;
+                    case  "från h":
+                        responsePojo.setResponse("När vi från H!");
+                        break;
+                    case  "marsch":
+                        responsePojo.setResponse("Marscherar in!");
+                        break;
+                }
+                break;
 
             case "info":
                 switch (keyWord) {
                     case "kokboken":
                         kokbokenService.getMenu();
                         break;
-                    default: responsePojo.setResponse1("Det finns ingen information om " + keyWord);
+                    default: responsePojo.setResponse("Det finns ingen information om " + keyWord);
                 }
                 break;
+            case "mat":
+                placeService.placeResponse("mat");
+                break;
 
-            default: responsePojo.setResponse1("Jag förstod inte din fråga");
+            default: responsePojo.setResponse("Jag förstod inte din fråga");
         }
     }
 }

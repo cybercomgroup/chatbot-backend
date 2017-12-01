@@ -59,9 +59,8 @@ public class PlaceService {
                     placeThree = jsonArray.getJSONObject(i).getString("name");
                 }
             }
-            responsePojo.setResponse1(placeOne);
-            responsePojo.setResponse2(placeTwo);
-            responsePojo.setResponse3(placeThree);
+            responsePojo.setResponse("Du kan hitta " + query + " vid: \n" +  placeOne + "\n"
+                    + placeTwo + "\n" + placeThree);
             placeOne = null;
             placeTwo = null;
             placeThree = null;

@@ -62,8 +62,7 @@ public class KokbokenService {
                             getJSONArray("displayNames").getJSONObject(0).getString("displayName");
                 }
             }
-            responsePojo.setResponse1(menuItemOne);
-            responsePojo.setResponse2(menuItemTwo);
+            responsePojo.setResponse("Express: "+ menuItemOne +"\nVegetarisk: " + menuItemTwo);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
