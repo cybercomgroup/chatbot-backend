@@ -1,5 +1,6 @@
 package Application.service;
 
+import Application.pojo.ResponsePojo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 public class WitaiService {
 
     private final ResponseParserService responseParserService;
+    private final ResponsePojo responsePojo;
 
     private static final String url = "https://api.wit.ai/message";
     private static final String token = "EWFRMP2FXYKOEF4CSSSANDO4F4NTGZCN";
@@ -37,9 +39,11 @@ public class WitaiService {
     private String response;
 
     @Autowired
-    public WitaiService(ResponseParserService responseParserService) {
+    public WitaiService(ResponseParserService responseParserService,
+            ResponsePojo responsePojo) {
 
         this.responseParserService = responseParserService;
+        this.responsePojo = responsePojo;
     }
 
     private String witResponse(String query) {
@@ -101,12 +105,17 @@ public class WitaiService {
         if(witResponse(query) != null)
             response = witResponse(query);
 
-        try {
-            JSONObject jsonObject = new JSONObject(new JSONTokener(response));
-            System.out.println(jsonObject);
-            responseParserService.setResponse(jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+        if(response != null) {
+            try {
+                JSONObject jsonObject = new JSONObject(new JSONTokener(response));
+                System.out.println(jsonObject);
+                responseParserService.setResponse(jsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else{
+            responsePojo.setResponse("Service down, try again later.");
         }
     }
 }

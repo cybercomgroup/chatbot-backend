@@ -40,9 +40,6 @@ public class ResponseParserService {
                 case "mat":
                     keyWord = query.getJSONObject("entities").getJSONArray("mat").getJSONObject(0).getString("value");
                     break;
-                case "v_sttrafik":
-                    keyWord = query.getJSONObject("entities").getJSONArray("v_sttrafik").getJSONObject(0).getString("value");
-                    break;
                 case "plats":
                     keyWord = query.getJSONObject("entities").getJSONArray("plats").getJSONObject(0).getString("value");
                     break;
@@ -51,6 +48,9 @@ public class ResponseParserService {
                     break;
                 case "mikro":
                     keyWord = query.getJSONObject("entities").getJSONArray("mikro").getJSONObject(0).getString("value");
+                    break;
+                case "number":
+                    keyWord = Integer.toString(query.getJSONObject("entities").getJSONArray("number").getJSONObject(0).getInt("value"));
                     break;
             }
         }

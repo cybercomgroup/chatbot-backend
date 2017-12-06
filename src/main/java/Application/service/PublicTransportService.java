@@ -42,47 +42,8 @@ public class PublicTransportService {
 
         HttpsURLConnection connection;
         try {
-            if (bus.equals("16")) {
 
-                URL obj = new URL(url16);
-                connection = (HttpsURLConnection) obj.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setRequestProperty("Authorization", "Bearer " + vts.tokenParser(vts.fetchToken()));
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String inputLine;
-                StringBuilder response = new StringBuilder();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-
-                in.close();
-                JSONObject jsonObject = XML.toJSONObject(response.toString());
-                jsonObject = jsonObject.getJSONObject("DepartureBoard");
-                JSONArray jsonArray = jsonObject.getJSONArray("Departure");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject temp = jsonArray.getJSONObject(i);
-                    if (temp.getString("name").equals("Buss 16") &&
-                            (temp.getString("direction").equals("Högsbohöjd") ||
-                                    temp.getString("direction").equals("Marklandsgatan"))) {
-                        if(departureOne == null)
-                            departureOne = temp.getString("time");
-                        else if(departureTwo == null)
-                            departureTwo = temp.getString("time");
-                        else if(departureThree == null)
-                            departureThree = temp.getString("time");
-
-                    }
-                }
-                responsePojo.setResponse(departureOne);
-                //responsePojo.setResponse2(departureTwo);
-                //responsePojo.setResponse3(departureThree);
-                departureOne = null;
-                departureTwo = null;
-                departureThree = null;
-
-            } else if (bus.equals("55")) {
+            if (bus.equals("55")) {
                 URL obj = new URL(url55);
                 connection = (HttpsURLConnection) obj.openConnection();
                 connection.setRequestMethod("GET");
@@ -105,20 +66,54 @@ public class PublicTransportService {
                     JSONObject temp = jsonArray.getJSONObject(i);
                     if (temp.getString("name").equals("Buss 55")) {
                         if(departureOne == null)
-                            departureOne = temp.getString("time");
+                            departureOne = "Buss 55 avgår: " +  temp.getString("time");
                         else if(departureTwo == null)
-                            departureTwo = temp.getString("time");
+                            departureTwo = "\nsedan " + temp.getString("time");
                         else if(departureThree == null)
-                            departureThree = temp.getString("time");
+                            departureThree = "\nsedan " + temp.getString("time");
                     }
                 }
 
-                responsePojo.setResponse(departureOne);
+                responsePojo.setResponse(departureOne + departureTwo + departureThree);
                 //responsePojo.setResponse2(departureTwo);
                 //responsePojo.setResponse3(departureThree);
                 departureOne = null;
                 departureTwo = null;
                 departureThree = null;
+            }  else  {
+
+                URL obj = new URL(url16);
+                connection = (HttpsURLConnection) obj.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Authorization", "Bearer " + vts.tokenParser(vts.fetchToken()));
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                in.close();
+                JSONObject jsonObject = XML.toJSONObject(response.toString());
+                jsonObject = jsonObject.getJSONObject("DepartureBoard");
+                JSONArray jsonArray = jsonObject.getJSONArray("Departure");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject temp = jsonArray.getJSONObject(i);
+                    if (temp.getString("name").equals("Buss "+bus)) {
+                        if(departureOne == null)
+                            departureOne = "Buss " + bus + " mot " + temp.getString("direction") +  " avgår: " + temp.getString("time");
+                        else if(departureTwo == null)
+                            departureTwo = "\nBuss " + bus + " mot " + temp.getString("direction") +  " avgår: " + temp.getString("time");
+
+
+                    }
+                }
+                responsePojo.setResponse(departureOne + departureTwo);
+                departureOne = null;
+                departureTwo = null;
+
             }
 
         } catch (IOException | JSONException e) {

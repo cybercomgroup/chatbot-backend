@@ -33,8 +33,6 @@ public class ResponseHandlerService {
     void getResponse() {
 
         responsePojo.setResponse(null);
-        //responsePojo.setResponse2(null);
-        //responsePojo.setResponse3(null);
 
         switch(intent) {
             case "locate":
@@ -58,11 +56,13 @@ public class ResponseHandlerService {
                         responsePojo.setResponse("På hörnet av Svea");
                         break;
                     case "Gasquen":
-                        responsePojo.setResponse("Under kyrkan på campus Johanneberg");
+                        responsePojo.setResponse("Förbi kårhuset på Johanneberg");
                         break;
                     case "mikro":
                         responsePojo.setResponse("Mirkovågsugnar finns vid: \nLoungen, tredje våningen, "
                                 + "Jupiter \nLunchrummet, källarvåning, Jupiter \nFT, källarvåning, Svea");
+                        break;
+                    case "droopy": responsePojo.setResponse("Droopy säger voff!");
                         break;
                     default:
                         if (keyWord.equals(null) || !keyWord.equals("")) {
@@ -83,16 +83,16 @@ public class ResponseHandlerService {
                     case "11an":
                         responsePojo.setResponse("15:00!");
                         break;
-                    case "16":
-                        pts.setBus("16");
-                        pts.getDepature();
-                        break;
-                    case "55":
-                        pts.setBus("55");
-                        pts.getDepature();
-                        break;
 
-                    default: responsePojo.setResponse("Det finns inga tider för " + keyWord);
+
+                    default:
+                        if(keyWord.chars().allMatch(Character::isDigit)/*keyWord.matches("-?\\d+(\\.\\d+)?")*/) {
+                            pts.setBus(keyWord);
+                            pts.getDepature();
+                        }else{
+                            responsePojo.setResponse("Det finns inga tider för " + keyWord);
+                        }
+
                 }
                 break;
             }
