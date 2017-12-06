@@ -23,8 +23,7 @@ public class ChatController {
 
     @RequestMapping(value = "/request")
     public ResponsePojo Request(@RequestParam(value = "request") String request) {
-        String request1 = request;
-        was.setPhrase(request1);
+        was.setPhrase(request);
 
         return responsePojo;
     }
