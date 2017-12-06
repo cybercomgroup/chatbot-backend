@@ -16,13 +16,16 @@ public class ResponseHandlerService {
 
     private final KokbokenService kokbokenService;
 
+    private final LsKitchenService lsKitchenService;
+
     @Autowired
     public ResponseHandlerService(PublicTransportService pts, ResponsePojo responsePojo,
-            PlaceService placeService, KokbokenService kokbokenService) {
+            PlaceService placeService, KokbokenService kokbokenService, LsKitchenService lsKitchenService) {
         this.pts = pts;
         this.responsePojo = responsePojo;
         this.placeService = placeService;
         this.kokbokenService = kokbokenService;
+        this.lsKitchenService = lsKitchenService;
     }
 
     void setIntentAndKeyWord(String intent, String keyWord) {
@@ -121,6 +124,9 @@ public class ResponseHandlerService {
                 switch (keyWord) {
                     case "kokboken":
                         kokbokenService.getMenu();
+                        break;
+                    case "L's kitchen":
+                        lsKitchenService.getMenu();
                         break;
                     default: responsePojo.setResponse("Det finns ingen information om " + keyWord);
                 }
