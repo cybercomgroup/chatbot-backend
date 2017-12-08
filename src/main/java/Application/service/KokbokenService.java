@@ -16,8 +16,6 @@ import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.sun.xml.internal.ws.api.message.Packet.Status.Request;
-
 @Service
 public class KokbokenService {
 
@@ -34,7 +32,7 @@ public class KokbokenService {
     }
 
 
-    void getMenu() {
+    public void getMenu() {
         try {
             OkHttpClient client = new OkHttpClient();
 

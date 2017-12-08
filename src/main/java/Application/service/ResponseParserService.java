@@ -1,5 +1,6 @@
 package Application.service;
 
+import Application.controller.ResponseHandlerController;
 import java.util.Iterator;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,12 +11,12 @@ import org.springframework.stereotype.Service;
 public class ResponseParserService {
     private String intent = "", keyWord = "";
 
-    private final ResponseHandlerService responseHandlerService;
+    private final ResponseHandlerController responseHandlerController;
 
     @Autowired
-    public ResponseParserService(ResponseHandlerService responseHandlerService) {
+    public ResponseParserService(ResponseHandlerController responseHandlerController) {
 
-        this.responseHandlerService = responseHandlerService;
+        this.responseHandlerController = responseHandlerController;
     }
 
     void setResponse(JSONObject response) {
@@ -55,8 +56,8 @@ public class ResponseParserService {
             }
         }
         System.out.println(keyWord);
-        responseHandlerService.setIntentAndKeyWord(intent, keyWord);
-        responseHandlerService.getResponse();
+        responseHandlerController.setIntentAndKeyWord(intent, keyWord);
+        responseHandlerController.getResponse();
 
     }
 }

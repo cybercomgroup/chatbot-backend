@@ -26,7 +26,7 @@ public class LsKitchenService {
     }
 
 
-    void getMenu() {
+    public void getMenu() {
         try {
             OkHttpClient client = new OkHttpClient();
 
