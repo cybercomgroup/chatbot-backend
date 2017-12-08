@@ -1,11 +1,15 @@
-package Application.service;
+package Application.controller;
 
 import Application.pojo.ResponsePojo;
+import Application.service.KokbokenService;
+import Application.service.LsKitchenService;
+import Application.service.PlaceService;
+import Application.service.PublicTransportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 
-@Service
-public class ResponseHandlerService {
+@Controller
+public class ResponseHandlerController {
     private String intent, keyWord;
 
     private final PublicTransportService pts;
@@ -19,7 +23,7 @@ public class ResponseHandlerService {
     private final LsKitchenService lsKitchenService;
 
     @Autowired
-    public ResponseHandlerService(PublicTransportService pts, ResponsePojo responsePojo,
+    public ResponseHandlerController(PublicTransportService pts, ResponsePojo responsePojo,
             PlaceService placeService, KokbokenService kokbokenService, LsKitchenService lsKitchenService) {
         this.pts = pts;
         this.responsePojo = responsePojo;
@@ -28,12 +32,12 @@ public class ResponseHandlerService {
         this.lsKitchenService = lsKitchenService;
     }
 
-    void setIntentAndKeyWord(String intent, String keyWord) {
+    public void setIntentAndKeyWord(String intent, String keyWord) {
         this.intent = intent;
         this.keyWord = keyWord;
     }
 
-    void getResponse() {
+    public void getResponse() {
 
         responsePojo.setResponse(null);
 

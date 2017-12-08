@@ -37,7 +37,7 @@ public class PlaceService {
         this.responsePojo = responsePojo;
     }
 
-    void placeResponse(String query){
+    public void placeResponse(String query){
 
         try {
             URL url = new URL(urlS + "lindholmen+" + query + KEY);

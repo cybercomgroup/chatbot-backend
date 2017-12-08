@@ -34,7 +34,7 @@ public class PublicTransportService {
         this.responsePojo = responsePojo;
     }
 
-    void getDepature() {
+    public void getDepature() {
         Date date = new Date();
 
         String url16 = "https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=9021014004490000&date=" + dateFormat.format(date);
@@ -120,7 +120,7 @@ public class PublicTransportService {
             e.printStackTrace();
         }
     }
-    void setBus(String bus) {
+    public void setBus(String bus) {
         this.bus = bus;
     }
 }

@@ -105,17 +105,12 @@ public class WitaiService {
         if(witResponse(query) != null)
             response = witResponse(query);
 
-
-        if(response != null) {
-            try {
-                JSONObject jsonObject = new JSONObject(new JSONTokener(response));
-                System.out.println(jsonObject);
-                responseParserService.setResponse(jsonObject);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }else{
-            responsePojo.setResponse("Service down, try again later.");
+        try {
+            JSONObject jsonObject = new JSONObject(new JSONTokener(response));
+            System.out.println(jsonObject);
+            responseParserService.setResponse(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
