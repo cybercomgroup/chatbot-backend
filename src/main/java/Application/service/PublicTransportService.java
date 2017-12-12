@@ -59,7 +59,6 @@ public class PublicTransportService {
 
                 in.close();
                 JSONObject jsonObject = XML.toJSONObject(response.toString());
-
                 jsonObject = jsonObject.getJSONObject("DepartureBoard");
                 JSONArray jsonArray = jsonObject.getJSONArray("Departure");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -75,8 +74,6 @@ public class PublicTransportService {
                 }
 
                 responsePojo.setResponse(departureOne + departureTwo + departureThree);
-                //responsePojo.setResponse2(departureTwo);
-                //responsePojo.setResponse3(departureThree);
                 departureOne = null;
                 departureTwo = null;
                 departureThree = null;
