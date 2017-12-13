@@ -46,7 +46,6 @@ public class PlaceService {
 
             JSONObject jsonObject = new JSONObject(new JSONTokener(getStringFromInputStream(in)));
             in.close();
-
             JSONArray jsonArray = jsonObject.getJSONArray("results");
             for(int i = 0; i < jsonArray.length(); i++) {
                 if(placeOne == null) {

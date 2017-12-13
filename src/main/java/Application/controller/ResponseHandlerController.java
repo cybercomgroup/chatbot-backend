@@ -66,7 +66,7 @@ public class ResponseHandlerController {
                         responsePojo.setResponse("Förbi kårhuset på Johanneberg");
                         break;
                     case "mikro":
-                        responsePojo.setResponse("Mirkovågsugnar finns vid: \nLoungen, tredje våningen, "
+                        responsePojo.setResponse("Mikrovågsugnar finns vid: \nLoungen, tredje våningen, "
                                 + "Jupiter \nLunchrummet, källarvåning, Jupiter \nFT, källarvåning, Svea");
                         break;
                     case "droopy": responsePojo.setResponse("Droopy säger voff!");
@@ -93,7 +93,7 @@ public class ResponseHandlerController {
 
 
                     default:
-                        if(keyWord.chars().allMatch(Character::isDigit)/*keyWord.matches("-?\\d+(\\.\\d+)?")*/) {
+                        if(keyWord.chars().allMatch(Character::isDigit)) {
                             pts.setBus(keyWord);
                             pts.getDepature();
                         }else{
