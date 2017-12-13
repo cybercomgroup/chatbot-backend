@@ -34,7 +34,7 @@ public class PublicTransportService {
         this.responsePojo = responsePojo;
     }
 
-    void getDepature() {
+    public void getDepature() {
         Date date = new Date();
 
         String url16 = "https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=9021014004490000&date=" + dateFormat.format(date);
@@ -59,7 +59,6 @@ public class PublicTransportService {
 
                 in.close();
                 JSONObject jsonObject = XML.toJSONObject(response.toString());
-
                 jsonObject = jsonObject.getJSONObject("DepartureBoard");
                 JSONArray jsonArray = jsonObject.getJSONArray("Departure");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -75,8 +74,6 @@ public class PublicTransportService {
                 }
 
                 responsePojo.setResponse(departureOne + departureTwo + departureThree);
-                //responsePojo.setResponse2(departureTwo);
-                //responsePojo.setResponse3(departureThree);
                 departureOne = null;
                 departureTwo = null;
                 departureThree = null;
@@ -110,7 +107,13 @@ public class PublicTransportService {
 
                     }
                 }
-                responsePojo.setResponse(departureOne + departureTwo);
+                if(departureOne == null) {
+                    responsePojo.setResponse("Hittade inga tider för buss "+ bus);
+                } else if (departureTwo == null) {
+                    responsePojo.setResponse(departureOne);
+                } else {
+                    responsePojo.setResponse(departureOne + departureTwo);
+                }
                 departureOne = null;
                 departureTwo = null;
 
@@ -120,7 +123,7 @@ public class PublicTransportService {
             e.printStackTrace();
         }
     }
-    void setBus(String bus) {
+    public void setBus(String bus) {
         this.bus = bus;
     }
 }

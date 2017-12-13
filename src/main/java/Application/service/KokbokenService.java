@@ -32,7 +32,7 @@ public class KokbokenService {
     }
 
 
-    void getMenu() {
+    public void getMenu() {
         try {
             OkHttpClient client = new OkHttpClient();
 

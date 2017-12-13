@@ -37,7 +37,7 @@ public class PlaceService {
         this.responsePojo = responsePojo;
     }
 
-    void placeResponse(String query){
+    public void placeResponse(String query){
 
         try {
             URL url = new URL(urlS + "lindholmen+" + query + KEY);
@@ -46,7 +46,6 @@ public class PlaceService {
 
             JSONObject jsonObject = new JSONObject(new JSONTokener(getStringFromInputStream(in)));
             in.close();
-
             JSONArray jsonArray = jsonObject.getJSONArray("results");
             for(int i = 0; i < jsonArray.length(); i++) {
                 if(placeOne == null) {
@@ -63,16 +62,18 @@ public class PlaceService {
             System.out.println(jsonObject);
 
             if(placeOne == null){
-                placeOne = "";
+                responsePojo.setResponse("Jag kan inte hitta " + query);
             }
-            if(placeTwo == null){
-                placeTwo = "";
+            else {
+                if(placeTwo == null)
+                    placeTwo = "";
+                if(placeThree == null)
+                    placeThree = "";
+
+                responsePojo.setResponse("Du kan hitta " + query + " vid: \n" +  placeOne + "\n"
+                        + placeTwo + "\n" + placeThree);
             }
-            if(placeThree == null){
-                placeThree = "";
-            }
-            responsePojo.setResponse("Du kan hitta " + query + " vid: \n" +  placeOne + "\n"
-                    + placeTwo + "\n" + placeThree);
+
             placeOne = null;
             placeTwo = null;
             placeThree = null;
