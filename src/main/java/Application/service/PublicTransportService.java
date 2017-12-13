@@ -107,7 +107,13 @@ public class PublicTransportService {
 
                     }
                 }
-                responsePojo.setResponse(departureOne + departureTwo);
+                if(departureOne == null) {
+                    responsePojo.setResponse("Hittade inga tider för buss "+ bus);
+                } else if (departureTwo == null) {
+                    responsePojo.setResponse(departureOne);
+                } else {
+                    responsePojo.setResponse(departureOne + departureTwo);
+                }
                 departureOne = null;
                 departureTwo = null;
 

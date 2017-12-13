@@ -62,16 +62,18 @@ public class PlaceService {
             System.out.println(jsonObject);
 
             if(placeOne == null){
-                placeOne = "";
+                responsePojo.setResponse("Jag kan inte hitta " + query);
             }
-            if(placeTwo == null){
-                placeTwo = "";
+            else {
+                if(placeTwo == null)
+                    placeTwo = "";
+                if(placeThree == null)
+                    placeThree = "";
+
+                responsePojo.setResponse("Du kan hitta " + query + " vid: \n" +  placeOne + "\n"
+                        + placeTwo + "\n" + placeThree);
             }
-            if(placeThree == null){
-                placeThree = "";
-            }
-            responsePojo.setResponse("Du kan hitta " + query + " vid: \n" +  placeOne + "\n"
-                    + placeTwo + "\n" + placeThree);
+
             placeOne = null;
             placeTwo = null;
             placeThree = null;
