@@ -7,6 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The URL the program gets, maps based on path in that URL to this class and method.
+ * Takes the requestParameter from the URL as parameter to the method.
+ * Request method then sends the parameter to WitAiService.
+ *
+ * @version 2017-12-06
+ * @author Joakim Willard
+ * @author Viktor Albihn
+ */
+
 @RestController
 @RequestMapping(value = "/chatbot")
 public class ChatController {
